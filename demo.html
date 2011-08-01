@@ -1,0 +1,201 @@
+<!doctype html>
+
+<!--
+	~ jquery.mb.components
+	~ Copyright (c) 2001-2011. Matteo Bicocchi (Pupunzi); Open lab srl, Firenze - Italy
+	~ email: mbicocchi@open-lab.com
+	~ site: http://pupunzi.com
+	~
+	~ Licences: MIT, GPL
+	~ http://www.opensource.org/licenses/mit-license.php
+	~ http://www.gnu.org/licenses/gpl.html
+	-->
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>mb.linearGallery 1.0</title>
+	<style type="text/css">
+
+
+		body{
+			margin: 0;
+			padding: 0;
+			white-space: inherit;
+			background: #fff;
+		}
+
+		#linearGallery{
+			position: relative;
+			width: 100%;
+			margin: auto;
+			-moz-box-sizing: border-box;
+			height: 590px;
+			/*background:#fff;*/
+			/*border: 1px solid red*/
+		}
+
+		.galleryWrapper{
+			position: relative;
+			overflow: hidden;
+			white-space: nowrap;
+			-moz-box-sizing: border-box;
+			vertical-align: top;
+			/*background: #ccc;*/
+		}
+
+		.galleryWrapper .imageWrapper{
+			position: relative;
+			width: 50%;
+			height: 101%;
+			display: inline-block;
+			text-align: center;
+			-moz-box-sizing: border-box;
+			margin: -2px;
+			padding: 0;
+			vertical-align: top;
+		}
+
+/*
+		.galleryWrapper .imageWrapper:last-child, .galleryWrapper .imageWrapper:first-child{
+			background: transparent;
+		}
+
+		.galleryWrapper .imageWrapper.sel{
+			background: transparent;
+		}
+*/
+
+		.galleryWrapper .imageWrapper img{
+			margin: auto;
+			height: 100%;
+		}
+
+		.controller{
+			margin: auto;
+			text-align: center;
+			padding: 20px;
+		}
+		.controller span{
+			display: inline-block;
+			cursor: pointer;
+			padding: 10px;
+			margin: 2px;
+			background:#333;
+			color:#fff;
+		}
+	</style>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+	<script type="text/javascript" src="inc/jquery.mb.linearGallery.js"></script>
+
+	<script type="text/javascript">
+
+		var actualIdx=0;
+
+		function goTo(idx, anim, async){
+
+			if(anim==undefined)
+				anim=true;
+
+			if(idx==actualIdx && anim)
+				return;
+
+			actualIdx=idx;
+
+
+			var gallery=$(".galleryWrapper");
+			var target= $(".imageWrapper").eq(actualIdx);
+			var allImages= $(".imageWrapper").not(target);
+
+
+			if(!async)
+				allImages= $(".imageWrapper");
+
+			var t=anim? 800:0;
+
+				allImages.animate({opacity:.2, scale: '.5'},t/2,function(){
+					allImages.removeClass("sel");target.addClass("sel");
+				});
+				allImages.css("z-index",0);target.css("z-index",1);
+				target.animate({opacity:1, scale: '1'},t,function(){});
+
+			var scrollLeft = (target.width()*actualIdx) - (($(".galleryWrapper").width()-target.width())/2);
+			if (!anim)
+				t=0;
+			$(".galleryWrapper").animate({scrollLeft:scrollLeft},t,function(){
+			});
+		}
+
+		$(function(){
+
+			$(".galleryWrapper").css({height:$(".galleryWrapper").parent().height()});
+			var images=$("img",".imageWrapper");
+			images.each(function(){
+				$(this).css({width:"auto",height:"100%"});
+				if($(this).width()>=$(this).parent().width()){
+					$(this).css({width:"100%",height:"auto"})
+				}
+			});
+
+			$(".imageWrapper").click(function(){
+				if($(this).find("img").length>0){
+					var idx= $(this).index();
+					goTo(idx);
+				}
+			});
+
+			goTo(1,false);
+
+			var prop = $(".galleryWrapper").height()/ $(".galleryWrapper").width();
+			$(window).resize(function(){
+
+				$(".galleryWrapper").css({height:$(".galleryWrapper").parent().height()});
+
+				var images=$("img",".imageWrapper");
+				images.each(function(){
+					$(this).css({width:"auto",height:"100%"});
+					if($(this).width()>=$(this).parent().width()){
+						$(this).css({width:"100%",height:"auto"})
+					}
+				});
+
+				var h= $(".galleryWrapper").width()*prop;
+				//$(".galleryWrapper").css({height:h});
+
+				goTo(actualIdx,false)
+			});
+
+		});
+	</script>
+</head>
+<body>
+
+<div id="wrapper">
+	<h1>jquery.mb.linearGallery demo</h1>
+
+	<div id="linearGallery">
+
+		<div class="galleryWrapper">
+			<div class="imageWrapper"></div>
+			<div class="imageWrapper"><img src="elements/gallery1/HR/01.jpg"></div>
+			<div class="imageWrapper"><img src="elements/gallery1/HR/02.jpg"></div>
+			<div class="imageWrapper"><img src="elements/gallery1/HR/03.jpg"></div>
+			<div class="imageWrapper"><img src="elements/gallery1/HR/04.jpg"></div>
+			<div class="imageWrapper"><img src="elements/gallery1/HR/05.jpg"></div>
+			<div class="imageWrapper"></div>
+		</div>
+
+	</div>
+
+	<div class="controller">
+		<span onclick="goTo(1)">1</span>
+		<span onclick="goTo(2)">2</span>
+		<span onclick="goTo(3)">3</span>
+		<span onclick="goTo(4)">4</span>
+		<span onclick="goTo(5)">5</span>
+	</div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!doctype html>
+
+<!--
+	~ jquery.mb.components
+	~ Copyright (c) 2001-2011. Matteo Bicocchi (Pupunzi); Open lab srl, Firenze - Italy
+	~ email: mbicocchi@open-lab.com
+	~ site: http://pupunzi.com
+	~
+	~ Licences: MIT, GPL
+	~ http://www.opensource.org/licenses/mit-license.php
+	~ http://www.gnu.org/licenses/gpl.html
+	-->
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>mb.linearGallery 1.0</title>
+	
+	<style type="text/css">
+
+		body{
+			margin: 0;
+			padding: 0;
+			white-space: inherit;
+			background: #fff;
+		}
+
+		#linearGallery{
+			position: relative;
+			width: 100%;
+			margin: auto;
+			-moz-box-sizing: border-box;
+			height: 590px;
+		}
+
+		.galleryWrapper{
+			position: relative;
+			overflow: hidden;
+			white-space: nowrap;
+			-moz-box-sizing: border-box;
+			vertical-align: top;
+			/*background: #ccc;*/
+		}
+
+		.galleryWrapper .imageWrapper{
+			position: relative;
+			width: 50%;
+			height: 101%;
+			display: inline-block;
+			text-align: center;
+			-moz-box-sizing: border-box;
+			margin: -2px;
+			padding: 0;
+			vertical-align: top;
+		}
+
+		.galleryWrapper .imageWrapper img{
+			margin: auto;
+			height: 100%;
+		}
+
+		.controller{
+			margin: auto;
+			text-align: center;
+			padding: 20px;
+		}
+
+		.controller span{
+			display: inline-block;
+			cursor: pointer;
+			padding: 10px;
+			margin: 2px;
+			background:#333;
+			color:#fff;
+		}
+
+	</style>
+
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+	<script type="text/javascript" src="inc/jquery.mb.linearGallery.js"></script>
+
+	<script type="text/javascript">
+
+		$(function(){
+
+			var gallImages=[
+				{url:"elements/gallery1/HR/01.jpg", desc:"", link:""},
+				{url:"elements/gallery1/HR/02.jpg", desc:"", link:""},
+				{url:"elements/gallery1/HR/03.jpg", desc:"", link:""},
+				{url:"elements/gallery1/HR/04.jpg", desc:"", link:""},
+				{url:"elements/gallery1/HR/05.jpg", desc:"", link:""}
+			];
+
+			$("#linearGallery").mbLinearGallery(
+					{images:gallImages}
+			);
+		});
+
+	</script>
+
+</head>
+<body>
+
+<div id="wrapper">
+	<h1>jquery.mb.linearGallery demo</h1>
+
+	<div id="linearGallery"></div>
+
+	<div class="controller">
+		<span onclick="goTo(1)">1</span>
+		<span onclick="goTo(2)">2</span>
+		<span onclick="goTo(3)">3</span>
+		<span onclick="goTo(4)">4</span>
+		<span onclick="goTo(5)">5</span>
+	</div>
+
+</div>
+
+</body>
+</html>
