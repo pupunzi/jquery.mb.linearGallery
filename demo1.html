@@ -13,106 +13,115 @@
 
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<title>mb.linearGallery 1.0</title>
-	
-	<style type="text/css">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>mb.linearGallery 1.0</title>
 
-		body{
-			margin: 0;
-			padding: 0;
-			white-space: inherit;
-			background: #fff;
-		}
+  <style type="text/css">
 
-		#linearGallery{
-			position: relative;
-			width: 100%;
-			margin: auto;
-			-moz-box-sizing: border-box;
-			height: 590px;
-		}
+    body{
+      margin: 0;
+      padding: 0;
+      white-space: inherit;
+      background: #fff;
+    }
 
-		.galleryWrapper{
-			position: relative;
-			overflow: hidden;
-			white-space: nowrap;
-			-moz-box-sizing: border-box;
-			vertical-align: top;
-			/*background: #ccc;*/
-		}
+    #linearGallery{
+      position: relative;
+      width: 100%;
+      margin: auto;
+      -moz-box-sizing: border-box;
+      height: 590px;
+    }
 
-		.galleryWrapper .imageWrapper{
-			position: relative;
-			width: 50%;
-			height: 101%;
-			display: inline-block;
-			text-align: center;
-			-moz-box-sizing: border-box;
-			margin: -2px;
-			padding: 0;
-			vertical-align: top;
-		}
+    .galleryWrapper{
+      position: relative;
+      overflow: hidden;
+      white-space: nowrap;
+      -moz-box-sizing: border-box;
+      vertical-align: top;
+    /*background: #ccc;*/
+    }
 
-		.galleryWrapper .imageWrapper img{
-			margin: auto;
-			height: 100%;
-		}
+    .galleryWrapper .imageWrapper{
+      position: relative;
+      width: 50%;
+      height: 101%;
+      display: inline-block;
+      text-align: center;
+      -moz-box-sizing: border-box;
+      margin: -2px;
+      padding: 0;
+      vertical-align: top;
+    }
 
-		.controller{
-			margin: auto;
-			text-align: center;
-			padding: 20px;
-		}
+    .galleryWrapper .imageWrapper img{
+      margin: auto;
+      height: 100%;
+    }
 
-		.controller span{
-			display: inline-block;
-			cursor: pointer;
-			padding: 10px;
-			margin: 2px;
-			background:#333;
-			color:#fff;
-		}
+    .controller{
+      margin: auto;
+      text-align: center;
+      padding: 20px;
+    }
 
-	</style>
+    .controller span{
+      display: inline-block;
+      cursor: pointer;
+      padding: 10px;
+      margin: 2px;
+      background:#333;
+      color:#fff;
+    }
 
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-	<script type="text/javascript" src="inc/jquery.mb.linearGallery.js"></script>
+  </style>
 
-	<script type="text/javascript">
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+  <script type="text/javascript" src="inc/jquery.mb.linearGallery.js"></script>
 
-		$(function(){
+  <script type="text/javascript">
 
-			var gallImages=[
-				{url:"elements/gallery1/HR/01.jpg", desc:"", link:""},
-				{url:"elements/gallery1/HR/02.jpg", desc:"", link:""},
-				{url:"elements/gallery1/HR/03.jpg", desc:"", link:""},
-				{url:"elements/gallery1/HR/04.jpg", desc:"", link:""},
-				{url:"elements/gallery1/HR/05.jpg", desc:"", link:""}
-			];
 
-			$("#linearGallery").mbLinearGallery(
-					{images:gallImages}
-			);
-		});
+    $(function(){
 
-	</script>
+      var gallImages=[
+        {url:"elements/gallery1/HR/01.jpg", desc:"", link:""},
+        {url:"elements/gallery1/HR/02.jpg", desc:"", link:""},
+        {url:"elements/gallery1/HR/03.jpg", desc:"", link:""},
+        {url:"elements/gallery1/HR/04.jpg", desc:"", link:""},
+        {url:"elements/gallery1/HR/05.jpg", desc:"", link:""}
+      ];
+
+      $("#linearGallery").mbLinearGallery(
+      {images:gallImages}
+        );
+    });
+
+  </script>
 
 </head>
 <body>
 
 <div id="wrapper">
-	<h1>jquery.mb.linearGallery demo</h1>
+  <h1>jquery.mb.linearGallery demo</h1>
 
-	<div id="linearGallery"></div>
+  <div id="linearGallery">
+<!--
+    <img src="elements/gallery1/HR/01.jpg">
+    <img src="elements/gallery1/HR/02.jpg">
+    <img src="elements/gallery1/HR/03.jpg">
+    <img src="elements/gallery1/HR/04.jpg">
+    <img src="elements/gallery1/HR/05.jpg">
+-->
+  </div>
 
-	<div class="controller">
-		<span onclick="goTo(1)">1</span>
-		<span onclick="goTo(2)">2</span>
-		<span onclick="goTo(3)">3</span>
-		<span onclick="goTo(4)">4</span>
-		<span onclick="goTo(5)">5</span>
-	</div>
+  <div class="controller">
+    <span onclick="$('#linearGallery').goTo(1)">1</span>
+    <span onclick="$('#linearGallery').goTo(2)">2</span>
+    <span onclick="$('#linearGallery').goTo(3)">3</span>
+    <span onclick="$('#linearGallery').goTo(4)">4</span>
+    <span onclick="$('#linearGallery').goTo(5)">5</span>
+  </div>
 
 </div>
 

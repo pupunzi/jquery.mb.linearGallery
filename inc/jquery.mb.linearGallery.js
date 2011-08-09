@@ -27,114 +27,156 @@
 
 (function($) {
 
-	$.mbLinearGallery={
-		name:"mb.linearGallery",
-		author:"Matteo Bicocchi",
-		version:"1.0",
-		defaults:{
-			images:[], // an array of objects: [{url:..., desc:..., link:...},{url:..., desc:..., link:...},...]
-			resizeEnabled:true,
-			onStart:function(){}
-		},
+  $.mbLinearGallery={
+    name:"mb.linearGallery",
+    author:"Matteo Bicocchi",
+    version:"1.0",
+    defaults:{
+      images:[], // an array of objects: [{url:..., desc:..., link:...},{url:..., desc:..., link:...},...]
+      resizeEnabled:true,
+      onStart:function(){}
+    },
 
-		build:function(opt){
-			return this.each(function(){
-				var gallery=this;
-				var $gallery=$(gallery);
+    build:function(opt){
+      return this.each(function(){
+        var gallery=this;
+        var $gallery=$(gallery);
 
-				gallery.opt={};
-				$.extend(gallery.opt,$.mbLinearGallery.defaults,opt);
+        gallery.opt={};
+        $.extend(gallery.opt,$.mbLinearGallery.defaults,opt);
 
-				gallery.opt.actualIdx=0;
+        gallery.opt.actualIdx=0;
 
-				var galleryWrapper=$("<div/>").addClass("galleryWrapper");
-				$gallery.append(galleryWrapper);
+        var galleryWrapper=$("<div/>").addClass("galleryWrapper");
+        $gallery.append(galleryWrapper);
 
-				galleryWrapper.css({
-					overflow:"hidden",
-					position: "relative",
-					whiteSpace: "nowrap",
-					"-moz-box-sizing": "border-box",
-					verticalAlign: "top"
-				});
+        galleryWrapper.css({
+          overflow:"hidden",
+          position: "relative",
+          whiteSpace: "nowrap",
+          "-moz-box-sizing": "border-box",
+          verticalAlign: "top"
+        });
 
-				for(var i=0; i<= gallery.opt.images.length-1;i++){
-					var newImg=$.mbLinearGallery.buildImage(gallery.opt.images[i]);
-					galleryWrapper.append(newImg);
-				}
+        for(var i=0; i<= gallery.opt.images.length-1;i++){
+          var newImg=$.mbLinearGallery.buildImage(gallery.opt.images[i]);
+          galleryWrapper.append(newImg);
+        }
 
-				// Add empty elements at the beginning and at the end.
-				galleryWrapper.prepend($.mbLinearGallery.buildImage());
-				galleryWrapper.append($.mbLinearGallery.buildImage());
+        // Add empty elements at the beginning and at the end.
+        galleryWrapper.prepend($.mbLinearGallery.buildImage());
+        galleryWrapper.append($.mbLinearGallery.buildImage());
 
-				// set the height of the gallery
-				galleryWrapper.css({height:$(".galleryWrapper").parent().height()});
+        // set the height of the gallery
+        galleryWrapper.css({height:$(".galleryWrapper").parent().height()});
 
-				var images=$("img",".imageWrapper");
-				images.each(function(){
-					$(this).css({width:"auto",height:"100%"});
-					if($(this).width()>=$(this).parent().width()){
-						$(this).css({width:"100%",height:"auto"})
-					}
-				});
+        var images=$("img",".imgWrapper");
+        images.each(function(){
+          $(this).css({width:"auto",height:"100%"});
+          if($(this).width()>=$(this).parent().width()){
+            $(this).css({width:"100%",height:"auto"})
+          }
+        });
 
-				$(window).resize($.mbLinearGallery.refresh);
+        $(window).resize(function(){$.mbLinearGallery.refresh(gallery)});
+        $gallery.goTo(gallery.opt.actualIdx,false,false);
 
-			})
-		},
+      })
+    },
 
-		buildImage:function(imgObj){
-			var imageWrapper= $("<div/>").addClass("imgWrapper");
-			imageWrapper.css({
-				position: "relative",
-				width: "50%",
-				height: "101%",
-				display: "inline-block",
-				"text-align": "center",
-				"-moz-box-sizing": "border-box",
-				margin: -2,
-				padding: 0,
-				"vertical-align":"top"
-			});
-			if(typeof imgObj == "object"){
-				var url= imgObj.url;
-				var desc= imgObj.desc;
-				var link= imgObj.link;
-				var content=$("<img>").addClass("galleryImage");
-				imageWrapper.append(content);
-				content.css({
-					margin: "auto",
-					height: "100%"
-				});
-				content.attr("src",url);
-			}
+    buildImage:function(imgObj){
+      var imageWrapper= $("<div/>").addClass("imgWrapper");
+      imageWrapper.css({
+        position: "relative",
+        width: "50%",
+        height: "101%",
+        display: "inline-block",
+        "text-align": "center",
+        "-moz-box-sizing": "border-box",
+        margin: -2,
+        padding: 0,
+        "vertical-align":"top"
+      });
 
-			return imageWrapper;
-		},
+      if(typeof imgObj == "object"){
+        var url= imgObj.url;
+        var desc= imgObj.desc;
+        var link= imgObj.link;
+        var content=$("<img>").addClass("galleryImage");
+        imageWrapper.append(content);
+        content.css({
+          margin: "auto",
+          height: "100%"
+        });
+        content.attr("src",url);
+      }
 
-		refresh:function(gallery){
-			
-			var galleryWrapper= $(".galleryWrapper",$(gallery));
-			var images=$("img",".imageWrapper");
+      return imageWrapper;
+    },
 
-			galleryWrapper.css({height:$(".galleryWrapper").parent().height()});
+    goTo:function(idx, anim, async){
+      console.debug(idx);
 
-			images.each(function(){
-				$(this).css({width:"auto",height:"100%"});
-				if($(this).width()>=$(this).parent().width()){
-					$(this).css({width:"100%",height:"auto"})
-				}
-			});
+      var g= this.get(0);
 
-			var h= $(".galleryWrapper").width()*prop;
-			if(gallery.opt.resizeEnabled)
-				$(".galleryWrapper").css({height:h});
+      if(anim==undefined)
+        anim=true;
 
-			goTo(gallery.opt.actualIdx,false)
+      if(idx==g.opt.actualIdx && anim)
+        return;
 
-		}
-	};
 
-	$.fn.mbLinearGallery= $.mbLinearGallery.build;
+      g.opt.actualIdx=idx;
+
+
+      var gallery=$(".galleryWrapper");
+      var target= $(".imgWrapper").eq(g.opt.actualIdx);
+      var allImages= $(".imgWrapper").not(target);
+
+
+      if(!async)
+        allImages= $(".imgWrapper");
+
+      var t=anim? 800:0;
+
+      allImages.animate({opacity:.2, scale: '.5'},t/2,function(){
+        allImages.removeClass("sel");target.addClass("sel");
+      });
+      allImages.css("z-index",0);target.css("z-index",1);
+      target.animate({opacity:1, scale: '1'},t,function(){});
+
+      var scrollLeft = (target.width()*g.opt.actualIdx) - (($(".galleryWrapper").width()-target.width())/2);
+      if (!anim)
+        t=0;
+      $(".galleryWrapper").animate({scrollLeft:scrollLeft},t);
+
+    },
+
+    refresh:function(gallery){
+
+      var galleryWrapper= $(".galleryWrapper",$(gallery));
+      var images=$("img",".imgWrapper");
+      var prop = galleryWrapper.height()/ galleryWrapper.width();
+
+      galleryWrapper.css({height:$(".galleryWrapper").parent().height()});
+
+      images.each(function(){
+        $(this).css({width:"auto",height:"100%"});
+        if($(this).width()>=$(this).parent().width()){
+          $(this).css({width:"100%",height:"auto"})
+        }
+      });
+
+      var h= $(".galleryWrapper").width()*prop;
+      if(gallery.opt.resizeEnabled)
+        $(".galleryWrapper").css({height:h});
+
+      $(gallery).goTo(gallery.opt.actualIdx,false);
+
+    }
+  };
+
+  $.fn.mbLinearGallery= $.mbLinearGallery.build;
+  $.fn.goTo= $.mbLinearGallery.goTo;
 
 })(jQuery);

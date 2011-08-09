@@ -30,7 +30,8 @@
 			width: 100%;
 			margin: auto;
 			-moz-box-sizing: border-box;
-			height: 590px;
+			height: 350px;
+      min-width:1024px;
 			/*background:#fff;*/
 			/*border: 1px solid red*/
 		}
@@ -56,16 +57,6 @@
 			vertical-align: top;
 		}
 
-/*
-		.galleryWrapper .imageWrapper:last-child, .galleryWrapper .imageWrapper:first-child{
-			background: transparent;
-		}
-
-		.galleryWrapper .imageWrapper.sel{
-			background: transparent;
-		}
-*/
-
 		.galleryWrapper .imageWrapper img{
 			margin: auto;
 			height: 100%;
@@ -86,9 +77,12 @@
 		}
 	</style>
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-	<script type="text/javascript" src="inc/jquery.mb.linearGallery.js"></script>
+	<!--<script type="text/javascript" src="inc/jquery.mb.linearGallery.js"></script>-->
 
 	<script type="text/javascript">
+
+    (function(b){var d=null,i=b.fn.css;b.fn.css=function(a,c){d===null&&(d=typeof b.cssProps!="undefined"?b.cssProps:typeof b.props!="undefined"?b.props:{});if(typeof d.transform=="undefined"&&(a=="transform"||typeof a=="object"&&typeof a.transform!="undefined")){var e=d,f;a:{f=this.get(0);for(var h=["transform","WebkitTransform","msTransform","MozTransform","OTransform"],g;g=h.shift();)if(typeof f.style[g]!="undefined"){f=g;break a}f="transform"}e.transform=f}if(d.transform!="transform")if(a=="transform"){if(a= d.transform,typeof c=="undefined"&&jQuery.style)return jQuery.style(this.get(0),a)}else if(typeof a=="object"&&typeof a.transform!="undefined")a[d.transform]=a.transform,delete a.transform;return i.apply(this,arguments)};var e="deg";b.fn.rotate=function(a){var c=b(this).css("transform")||"none";if(typeof a=="undefined"){if(c&&(a=c.match(/rotate\(([^)]+)\)/))&&a[1])return a[1];return 0}if(a=a.toString().match(/^(-?\d+(\.\d+)?)(.+)?$/))a[3]&&(e=a[3]),b(this).css("transform",c.replace(/none|rotate\([^)]*\)/, "")+"rotate("+a[1]+e+")");return this};b.fn.scale=function(a){var c=b(this).css("transform");if(typeof a=="undefined"){if(c&&(a=c.match(/scale\(([^)]+)\)/))&&a[1])return a[1];return 1}b(this).css("transform",c.replace(/none|scale\([^)]*\)/,"")+"scale("+a+")");return this};var h=b.fx.prototype.cur;b.fx.prototype.cur=function(){if(this.prop=="rotate")return parseFloat(b(this.elem).rotate());else if(this.prop=="scale")return parseFloat(b(this.elem).scale());return h.apply(this,arguments)};b.fx.step.rotate= function(a){b(a.elem).rotate(a.now+e)};b.fx.step.scale=function(a){b(a.elem).scale(a.now)};var j=b.fn.animate;b.fn.animate=function(a){if(typeof a.rotate!="undefined"){var b=a.rotate.toString().match(/^(([+-]=)?(-?\d+(\.\d+)?))(.+)?$/);b&&b[5]&&(e=b[5]);a.rotate=b[1]}return j.apply(this,arguments)}})(jQuery);
+
 
 		var actualIdx=0;
 
@@ -119,10 +113,10 @@
 				allImages.css("z-index",0);target.css("z-index",1);
 				target.animate({opacity:1, scale: '1'},t,function(){});
 
-			var scrollLeft = (target.width()*actualIdx) - (($(".galleryWrapper").width()-target.width())/2);
+			var scrollLeft = (target.width()*actualIdx) - ((gallery.width()-target.width())/2);
 			if (!anim)
 				t=0;
-			$(".galleryWrapper").animate({scrollLeft:scrollLeft},t,function(){
+			gallery.animate({scrollLeft:scrollLeft},t,function(){
 			});
 		}
 
