@@ -45,7 +45,7 @@
         gallery.opt={};
         $.extend(gallery.opt,$.mbLinearGallery.defaults,opt);
 
-        gallery.opt.actualIdx=0;
+        gallery.opt.actualIdx;
 
         var galleryWrapper=$("<div/>").addClass("galleryWrapper");
         $gallery.append(galleryWrapper);
@@ -79,7 +79,7 @@
         });
 
         $(window).resize(function(){$.mbLinearGallery.refresh(gallery)});
-        $gallery.goTo(gallery.opt.actualIdx,false,false);
+        $gallery.goTo(1,false,false);
 
       })
     },
@@ -115,7 +115,6 @@
     },
 
     goTo:function(idx, anim, async){
-      console.debug(idx);
 
       var g= this.get(0);
 
@@ -132,8 +131,7 @@
       var gallery=$(".galleryWrapper");
       var target= $(".imgWrapper").eq(g.opt.actualIdx);
       var allImages= $(".imgWrapper").not(target);
-
-
+      
       if(!async)
         allImages= $(".imgWrapper");
 
