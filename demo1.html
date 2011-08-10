@@ -74,6 +74,21 @@
       box-sizing:border-box;
     }
 
+    #thumbs{
+      width:580px;
+      margin:auto;
+      /*text-align:left;*/
+    }
+
+    .thumbWrapper{
+      display:inline-block;
+      overflow:hidden;
+      width:100px;
+      height:100px;
+      margin:5px;
+      border:1px solid red;
+    }
+
   </style>
 
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
@@ -106,20 +121,22 @@
   <h1>jquery.mb.linearGallery demo</h1>
 
   <div id="linearGallery">
-    <img src="elements/gallery1/HR/01.jpg" title="photo n°1" data-link="http://pupunzi.com" data_thumb="elements/gallery1/HR/01_thumb.jpg">
-    <img src="elements/gallery1/HR/02.jpg" >
-    <img src="elements/gallery1/HR/03.jpg" title="photo n°3" data-link="http://pupunzi.open-lab.com">
-    <img src="elements/gallery1/HR/04.jpg" title="photo n°4">
-    <img src="elements/gallery1/HR/05.jpg" title="photo n°5">
+    <img src="elements/gallery1/HR/01.jpg" title="photo n°1" data-link="http://pupunzi.com" data-thumb="elements/gallery1/HR/01.jpg">
+    <img src="elements/gallery1/HR/02.jpg" data-thumb="elements/gallery1/HR/02.jpg">
+    <img src="elements/gallery1/HR/03.jpg" title="photo n°3" data-link="http://pupunzi.open-lab.com" data-thumb="elements/gallery1/HR/03.jpg">
+    <img src="elements/gallery1/HR/04.jpg" title="photo n°4" data-thumb="elements/gallery1/HR/04a.jpg">
+    <img src="elements/gallery1/HR/05.jpg" title="photo n°5" data-thumb="elements/gallery1/HR/05.jpg">
   </div>
   <div id="desc"></div>
 
-  <div class="controller">
+  <div id="thumbs" class="controller">
+<!--
     <span onclick="$('#linearGallery').goTo(1)">1</span>
     <span onclick="$('#linearGallery').goTo(2)">2</span>
     <span onclick="$('#linearGallery').goTo(3)">3</span>
     <span onclick="$('#linearGallery').goTo(4)">4</span>
     <span onclick="$('#linearGallery').goTo(5)">5</span>
+-->
   </div>
 
 </div>

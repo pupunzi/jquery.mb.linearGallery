@@ -37,6 +37,7 @@
       // an array of objects: [{url:..., desc:..., link:...},{url:..., desc:..., link:...},...]
       // if leaved empty then it looks into the HTML code for images as: 
       // <img src="elements/gallery1/HR/01.jpg" title="photo n°1" data-link="http://pupunzi.com" data_thumb="elements/gallery1/HR/01_thumb.jpg">
+      thumbPlaceHolder:"#thumbs",
       resizeEnabled:false,
       transitionTime:600,
       imageWrapperWidth:"50%",
@@ -76,6 +77,8 @@
         for(var i=0; i<= gallery.opt.images.length-1;i++){
           var newImg=$.mbLinearGallery.buildImage(gallery,gallery.opt.images[i]);
           galleryWrapper.append(newImg);
+
+          $.mbLinearGallery.buildThumbs(gallery,gallery.opt.images[i])
         }
 
         // Add empty elements at the beginning and at the end.
@@ -112,7 +115,7 @@
         display: "inline-block",
         "text-align": "center",
         "-moz-box-sizing": "border-box",
-        margin: -2,
+//        margin: -2,
         padding: 0,
         "vertical-align":"top"
       });
@@ -165,6 +168,27 @@
       return imageWrapper;
     },
 
+    buildThumbs:function(gallery,imgObj){
+      
+      var thumbPlaceHolder= $(gallery.opt.thumbPlaceHolder);
+      var thumbURL= imgObj.url ? imgObj.thumb : $(imgObj).data("thumb");
+      var thumb=$("<img>").addClass("imgThumb").attr("src",thumbURL);
+      var thumbWrapper= $("<div>").addClass("thumbWrapper");
+
+      thumbWrapper.append(thumb);
+
+      thumbWrapper.click(function(){
+        if($(this).find("img").length>0){
+          var idx= $(this).index()+1;
+          $(gallery).goTo(idx,true);
+        }
+      });
+
+
+
+      thumbPlaceHolder.append(thumbWrapper);
+    },
+
     goTo:function(idx, anim){
       var g= this.get(0);
 
@@ -197,7 +221,7 @@
       });
 
 
-      var scrollLeft = (target.width()*g.opt.actualIdx) - (($(".galleryWrapper",g).width()-target.width())/2);
+      var scrollLeft = (target.width()*g.opt.actualIdx) - (($(".galleryWrapper",g).outerWidth()-target.outerWidth())/2);
 
       $(".galleryWrapper",g).animate({scrollLeft:scrollLeft},t,function(){
         if(typeof g.opt.onChange == "function"){
