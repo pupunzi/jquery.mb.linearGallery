@@ -42,8 +42,8 @@
       transitionTime:600,
       imageWrapperWidth:"50%",
       imageMinWidth:550,
-      defaultScale:.5,
-      defaultOpacity:.2,
+      defaultScale:.3,
+      defaultOpacity:.7,
       onStart:function(){},
       onChange:function(){}
     },
