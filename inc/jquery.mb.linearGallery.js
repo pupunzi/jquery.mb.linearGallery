@@ -31,11 +31,14 @@
     name:"mb.linearGallery",
     author:"Matteo Bicocchi",
     version:"1.0",
+
     defaults:{
       images:[], // an array of objects: [{url:..., desc:..., link:...},{url:..., desc:..., link:...},...]
-      resizeEnabled:true,
-      transitionTime:1000,
-      defaultScale:.3,
+      resizeEnabled:false,
+      transitionTime:600,
+      imageWrapperWidth:"50%",
+      imageMinWidth:550,
+      defaultScale:.5,
       defaultOpacity:.2,
       onStart:function(){},
       onChange:function(){}
@@ -46,10 +49,10 @@
         var gallery=this;
         var $gallery=$(gallery);
 
+        $gallery.find("img").hide();
+
         gallery.opt={};
         $.extend(gallery.opt,$.mbLinearGallery.defaults,opt);
-
-//        gallery.opt.actualIdx;
 
         var galleryWrapper=$("<div/>").addClass("galleryWrapper");
         $gallery.append(galleryWrapper);
@@ -61,6 +64,11 @@
           "-moz-box-sizing": "border-box",
           verticalAlign: "top"
         });
+
+        if (gallery.opt.images.length == 0){
+          gallery.opt.images = $gallery.find("img");
+        }
+
 
         for(var i=0; i<= gallery.opt.images.length-1;i++){
           var newImg=$.mbLinearGallery.buildImage(gallery,gallery.opt.images[i]);
@@ -75,15 +83,17 @@
         galleryWrapper.css({height:$(".galleryWrapper").parent().height()});
 
         var images=$("img",".imgWrapper");
-        images.each(function(){
+        images.each(function(i){
           $(this).css({width:"auto",height:"100%"});
           if($(this).width()>=$(this).parent().width()){
             $(this).css({width:"100%",height:"auto"})
           }
+
+          $(this).data("index",i+1)
         });
 
         $(window).resize(function(){$.mbLinearGallery.refresh(gallery)});
-        $gallery.goTo(1,false,false);
+        $gallery.goTo(1,false);
 
       })
     },
@@ -92,7 +102,9 @@
       var imageWrapper= $("<div/>").addClass("imgWrapper");
       imageWrapper.css({
         position: "relative",
-        width: "50%",
+        overflow:"hidden",
+        width: gallery.opt.imageWrapperWidth,
+        minWidth: gallery.opt.imageMinWidth,
         height: "101%",
         display: "inline-block",
         "text-align": "center",
@@ -105,30 +117,52 @@
       imageWrapper.click(function(){
         if($(this).find("img").length>0){
           var idx= $(this).index();
-          $(gallery).goTo(idx);
+          $(gallery).goTo(idx,true);
         }
       });
 
-
       if(typeof imgObj == "object"){
-        var url= imgObj.url;
-        var desc= imgObj.desc;
-        var link= imgObj.link;
-        var content=$("<img>").addClass("galleryImage");
-        imageWrapper.append(content);
-        content.css({
+        var url= imgObj.url ? imgObj.url : $(imgObj).attr("src");
+        var link= imgObj.link ? imgObj.link : $(imgObj).data("link");
+        var image=$("<img>").addClass("galleryImage").css({position:"relative"});
+        image.css({
           margin: "auto",
           cursor: "pointer",
           height: "100%"
         });
-        content.attr("src",url);
+
+        image.attr("src",url);
+        imageWrapper.append(image);
+
+        image.load(function(){
+          var desc= imgObj.desc ? imgObj.desc : $(imgObj).attr("title");
+
+          if(desc){
+            var description=$("<div>").addClass("imageDesc")
+              .css({position:"absolute",bottom:0,left:image.position().left, width:image.width(), display:"none"}).html(desc);
+            imageWrapper.append(description);
+            if(image.data("index")==1){
+              description.fadeIn();
+            }
+          }
+
+          if(link){
+            $(this).click(function(){
+              var idx= image.data("index");
+              if(idx == gallery.opt.actualIdx ){
+                window.open(link);
+              }
+
+            });
+
+          }
+        })
       }
 
       return imageWrapper;
     },
 
-    goTo:function(idx, anim, async){
-
+    goTo:function(idx, anim){
       var g= this.get(0);
 
       if(anim==undefined)
@@ -137,30 +171,32 @@
       if(idx==g.opt.actualIdx && anim)
         return;
 
-
       g.opt.actualIdx=idx;
 
-
-      var gallery=$(".galleryWrapper");
+      var gallery=$(".galleryWrapper",g);
       var target= $(".imgWrapper").eq(g.opt.actualIdx);
-      var allImages= $(".imgWrapper").not(target);
-
-      if(!async)
-        allImages= $(".imgWrapper");
+      var allImages= $(".imgWrapper",g);
 
       var t=anim? g.opt.transitionTime:0;
       allImages.animate({opacity:g.opt.defaultOpacity, scale: g.opt.defaultScale},t/2,function(){
         allImages.removeClass("sel");
         target.addClass("sel");
         allImages.css("z-index",0);
-        target.css("z-index",1);        
+        target.css("z-index",1);
+        if(anim)
+          $(".imageDesc", $(this)).fadeOut();
       });
 
-      target.animate({opacity:1, scale: '1'},t,function(){});
+      target.animate({opacity:1, scale: '1'},t,function(){
+        if(anim)
+        $(".imageDesc", target).fadeIn();
+        $(".imageDesc", target).css({position:"absolute",bottom:0,left:$("img",target).position().left, width:$("img",target).width()});
+      });
 
-      var scrollLeft = (target.width()*g.opt.actualIdx) - (($(".galleryWrapper").width()-target.width())/2);
 
-      $(".galleryWrapper").animate({scrollLeft:scrollLeft},t,function(){
+      var scrollLeft = (target.width()*g.opt.actualIdx) - (($(".galleryWrapper",g).width()-target.width())/2);
+
+      $(".galleryWrapper",g).animate({scrollLeft:scrollLeft},t,function(){
         if(typeof g.opt.onChange == "function"){
           g.opt.onChange(g.opt.actualIdx);
         }
@@ -174,7 +210,8 @@
       var images=$("img",".imgWrapper");
       var prop = galleryWrapper.height()/ galleryWrapper.width();
 
-      galleryWrapper.css({height:$(".galleryWrapper").parent().height()});
+
+      galleryWrapper.css({height:$(gallery).height()});
 
       images.each(function(){
         $(this).css({width:"auto",height:"100%"});
@@ -183,9 +220,11 @@
         }
       });
 
-      var h= $(".galleryWrapper").width()*prop;
-      if(gallery.opt.resizeEnabled)
-        $(".galleryWrapper").css({height:h});
+      var h= $(".galleryWrapper",$(gallery)).width()*prop;
+
+      if(gallery.opt.resizeEnabled){
+        $(".galleryWrapper",$(gallery)).css({height:h});
+      }
 
       $(gallery).goTo(gallery.opt.actualIdx,false);
 
