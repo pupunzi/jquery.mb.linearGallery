@@ -33,7 +33,10 @@
     version:"1.0",
 
     defaults:{
-      images:[], // an array of objects: [{url:..., desc:..., link:...},{url:..., desc:..., link:...},...]
+      images:[],
+      // an array of objects: [{url:..., desc:..., link:...},{url:..., desc:..., link:...},...]
+      // if leaved empty then it looks into the HTML code for images as: 
+      // <img src="elements/gallery1/HR/01.jpg" title="photo n°1" data-link="http://pupunzi.com" data_thumb="elements/gallery1/HR/01_thumb.jpg">
       resizeEnabled:false,
       transitionTime:600,
       imageWrapperWidth:"50%",
