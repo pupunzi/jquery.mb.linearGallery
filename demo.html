@@ -13,181 +13,67 @@
 
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<title>mb.linearGallery 1.0</title>
-	<style type="text/css">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>mb.linearGallery 1.0</title>
+
+    <link href="css/mb.linearGallery.css" rel="stylesheet" type="text/css">
+    <style type="text/css">
+
+        body{
+            margin: 0;
+            padding: 0;
+            white-space: inherit;
+            background: #ffcc00;
+        }
+        .controller{
+            margin: auto;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .controller span{
+            display: inline-block;
+            cursor: pointer;
+            padding: 10px;
+            margin: 2px;
+            background:#333;
+            color:#fff;
+        }
+
+    </style>
+
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script type="text/javascript" src="inc/jquery.mb.linearGallery.js"></script>
+
+    <script type="text/javascript">
 
 
-		body{
-			margin: 0;
-			padding: 0;
-			white-space: inherit;
-			background: #fff;
-		}
+        $(function(){
+            $("#linearGallery").mbLinearGallery();
+        });
 
-		#linearGallery{
-			position: relative;
-			width: 100%;
-			margin: auto;
-			-moz-box-sizing: border-box;
-			height: 350px;
-      min-width:1024px;
-			/*background:#fff;*/
-			/*border: 1px solid red*/
-		}
+    </script>
 
-		.galleryWrapper{
-			position: relative;
-			overflow: hidden;
-			white-space: nowrap;
-			-moz-box-sizing: border-box;
-			vertical-align: top;
-			/*background: #ccc;*/
-		}
-
-		.galleryWrapper .imageWrapper{
-			position: relative;
-			width: 50%;
-			height: 101%;
-			display: inline-block;
-			text-align: center;
-			-moz-box-sizing: border-box;
-			margin: -2px;
-			padding: 0;
-			vertical-align: top;
-		}
-
-		.galleryWrapper .imageWrapper img{
-			margin: auto;
-			height: 100%;
-		}
-
-		.controller{
-			margin: auto;
-			text-align: center;
-			padding: 20px;
-		}
-		.controller span{
-			display: inline-block;
-			cursor: pointer;
-			padding: 10px;
-			margin: 2px;
-			background:#333;
-			color:#fff;
-		}
-	</style>
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-	<!--<script type="text/javascript" src="inc/jquery.mb.linearGallery.js"></script>-->
-
-	<script type="text/javascript">
-
-    (function(b){var d=null,i=b.fn.css;b.fn.css=function(a,c){d===null&&(d=typeof b.cssProps!="undefined"?b.cssProps:typeof b.props!="undefined"?b.props:{});if(typeof d.transform=="undefined"&&(a=="transform"||typeof a=="object"&&typeof a.transform!="undefined")){var e=d,f;a:{f=this.get(0);for(var h=["transform","WebkitTransform","msTransform","MozTransform","OTransform"],g;g=h.shift();)if(typeof f.style[g]!="undefined"){f=g;break a}f="transform"}e.transform=f}if(d.transform!="transform")if(a=="transform"){if(a= d.transform,typeof c=="undefined"&&jQuery.style)return jQuery.style(this.get(0),a)}else if(typeof a=="object"&&typeof a.transform!="undefined")a[d.transform]=a.transform,delete a.transform;return i.apply(this,arguments)};var e="deg";b.fn.rotate=function(a){var c=b(this).css("transform")||"none";if(typeof a=="undefined"){if(c&&(a=c.match(/rotate\(([^)]+)\)/))&&a[1])return a[1];return 0}if(a=a.toString().match(/^(-?\d+(\.\d+)?)(.+)?$/))a[3]&&(e=a[3]),b(this).css("transform",c.replace(/none|rotate\([^)]*\)/, "")+"rotate("+a[1]+e+")");return this};b.fn.scale=function(a){var c=b(this).css("transform");if(typeof a=="undefined"){if(c&&(a=c.match(/scale\(([^)]+)\)/))&&a[1])return a[1];return 1}b(this).css("transform",c.replace(/none|scale\([^)]*\)/,"")+"scale("+a+")");return this};var h=b.fx.prototype.cur;b.fx.prototype.cur=function(){if(this.prop=="rotate")return parseFloat(b(this.elem).rotate());else if(this.prop=="scale")return parseFloat(b(this.elem).scale());return h.apply(this,arguments)};b.fx.step.rotate= function(a){b(a.elem).rotate(a.now+e)};b.fx.step.scale=function(a){b(a.elem).scale(a.now)};var j=b.fn.animate;b.fn.animate=function(a){if(typeof a.rotate!="undefined"){var b=a.rotate.toString().match(/^(([+-]=)?(-?\d+(\.\d+)?))(.+)?$/);b&&b[5]&&(e=b[5]);a.rotate=b[1]}return j.apply(this,arguments)}})(jQuery);
-
-
-		var actualIdx=0;
-
-		function goTo(idx, anim, async){
-
-			if(anim==undefined)
-				anim=true;
-
-			if(idx==actualIdx && anim)
-				return;
-
-			actualIdx=idx;
-
-
-			var gallery=$(".galleryWrapper");
-			var target= $(".imageWrapper").eq(actualIdx);
-			var allImages= $(".imageWrapper").not(target);
-
-
-			if(!async)
-				allImages= $(".imageWrapper");
-
-			var t=anim? 800:0;
-
-				allImages.animate({opacity:.2, scale: '.5'},t/2,function(){
-					allImages.removeClass("sel");target.addClass("sel");
-				});
-				allImages.css("z-index",0);target.css("z-index",1);
-				target.animate({opacity:1, scale: '1'},t,function(){});
-
-			var scrollLeft = (target.width()*actualIdx) - ((gallery.width()-target.width())/2);
-			if (!anim)
-				t=0;
-			gallery.animate({scrollLeft:scrollLeft},t,function(){
-			});
-		}
-
-		$(function(){
-
-			$(".galleryWrapper").css({height:$(".galleryWrapper").parent().height()});
-			var images=$("img",".imageWrapper");
-			images.each(function(){
-				$(this).css({width:"auto",height:"100%"});
-				if($(this).width()>=$(this).parent().width()){
-					$(this).css({width:"100%",height:"auto"})
-				}
-			});
-
-			$(".imageWrapper").click(function(){
-				if($(this).find("img").length>0){
-					var idx= $(this).index();
-					goTo(idx);
-				}
-			});
-
-			goTo(1,false);
-
-			var prop = $(".galleryWrapper").height()/ $(".galleryWrapper").width();
-			$(window).resize(function(){
-
-				$(".galleryWrapper").css({height:$(".galleryWrapper").parent().height()});
-
-				var images=$("img",".imageWrapper");
-				images.each(function(){
-					$(this).css({width:"auto",height:"100%"});
-					if($(this).width()>=$(this).parent().width()){
-						$(this).css({width:"100%",height:"auto"})
-					}
-				});
-
-				var h= $(".galleryWrapper").width()*prop;
-				//$(".galleryWrapper").css({height:h});
-
-				goTo(actualIdx,false)
-			});
-
-		});
-	</script>
 </head>
 <body>
 
 <div id="wrapper">
-	<h1>jquery.mb.linearGallery demo</h1>
+    <h1>jquery.mb.linearGallery demo</h1>
 
-	<div id="linearGallery">
+    <div id="linearGallery">
+        <img src="elements/gallery1/HR/01.jpg" title="photo n°1" data-thumb="elements/gallery1/HR/01.jpg">
+        <img src="elements/gallery1/HR/03.jpg" title="photo n°3" data-thumb="elements/gallery1/HR/03.jpg">
+        <img src="elements/gallery1/HR/04.jpg" title="photo n°4" data-thumb="elements/gallery1/HR/04.jpg">
+        <div class="box" data-link="" data-nozoom=true data-thumb="elements/gallery1/HR/01.jpg" style="text-align: left">
+            <div style="position:absolute;top:0; width: 60%">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</div>
+            <img style="position:absolute; top:0; right:0; width: 35%" src="elements/gallery1/HR/01.jpg">
+        </div>
+        <img src="elements/gallery1/HR/02.jpg" data-thumb="elements/gallery1/HR/02.jpg">
+        <img src="elements/gallery1/HR/05.jpg" title="photo n°5" data-thumb="elements/gallery1/HR/05.jpg" data-link="http://pupunzi.com">
+    </div>
+    <div id="desc"></div>
 
-		<div class="galleryWrapper">
-			<div class="imageWrapper"></div>
-			<div class="imageWrapper"><img src="elements/gallery1/HR/01.jpg"></div>
-			<div class="imageWrapper"><img src="elements/gallery1/HR/02.jpg"></div>
-			<div class="imageWrapper"><img src="elements/gallery1/HR/03.jpg"></div>
-			<div class="imageWrapper"><img src="elements/gallery1/HR/04.jpg"></div>
-			<div class="imageWrapper"><img src="elements/gallery1/HR/05.jpg"></div>
-			<div class="imageWrapper"></div>
-		</div>
-
-	</div>
-
-	<div class="controller">
-		<span onclick="goTo(1)">1</span>
-		<span onclick="goTo(2)">2</span>
-		<span onclick="goTo(3)">3</span>
-		<span onclick="goTo(4)">4</span>
-		<span onclick="goTo(5)">5</span>
-	</div>
+    <div id="thumbs" class="controller"></div>
 
 </div>
 
