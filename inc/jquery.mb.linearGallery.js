@@ -233,6 +233,7 @@ $.fn.initPagination=function(b){var a=this.get(0);a.opt={elements:null,elsPerPag
                                 zoomDesc.fadeIn();
                             });
                             overlay.one("click",function(){
+                                zoomDesc.fadeOut();
                                 zoomEl.animate({scale: '1', top:startTop},t,function(){
                                     overlay.fadeOut(t*2,function(){overlay.remove()});
                                 });
