@@ -1,23 +1,4 @@
 /*GALLERY STYLE*/
-#linearGallery{
-    position: relative;
-    width: 100%;
-    margin: auto;
-    -moz-box-sizing: border-box;
-    height: 550px;
-}
-
-#linearGallery .element{
-    display:none;
-}
-
-.galleryBox .box{
-    font:35px/40px 'Abel', sans-serif;
-    color:gray;
-    white-space: normal;
-    overflow: hidden;
-    margin-top: 30px;
-}
 
 .galleryWrapper{
     position: relative;
@@ -33,11 +14,16 @@
 }
 
 .elementWrapper.sel.zoom .element{
-    cursor:url(lens.cur), default !important;
+    /*cursor:url(lens.cur), default !important;*/
+    cursor:url("zoomin.png"), -moz-zoom-in !important;
 }
 
 .elementWrapper.sel .element{
     cursor:default !important;
+}
+
+.elementWrapper.sel .element.link{
+    cursor:pointer !important;
 }
 
 .imageDesc{
@@ -166,7 +152,7 @@
 }
 
 .zoomDesc{
-    background: transparent;
+    background: rgba(0,0,0,0.8);
     font:16px/18px Helvetica, sans-serif;
     text-align: center!important;
     color:#fff;

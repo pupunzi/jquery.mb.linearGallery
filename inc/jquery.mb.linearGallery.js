@@ -134,9 +134,6 @@ $.fn.initPagination=function(b){var a=this.get(0);a.opt={elements:null,elsPerPag
         buildImage:function(gallery, imgObj, idx){
             var elementWrapper= $("<div/>").addClass("elementWrapper");
 
-            if($(imgObj).data("nozoom"))
-                elementWrapper.addClass("noZoom");
-
             elementWrapper.css({
                 position: "relative",
                 overflow:"hidden",
@@ -160,6 +157,11 @@ $.fn.initPagination=function(b){var a=this.get(0);a.opt={elements:null,elsPerPag
                 var url= imgObj.url ? imgObj.url : $(imgObj).attr("src");
                 var link= imgObj.link ? imgObj.link : $(imgObj).data("link");
                 var element;
+
+                if($(imgObj).data("nozoom") || link)
+                    elementWrapper.addClass("noZoom");
+
+                
 
                 if(url){
                     element=$("<img>").addClass("galleryImage element").css({position:"relative"});
@@ -196,6 +198,7 @@ $.fn.initPagination=function(b){var a=this.get(0);a.opt={elements:null,elsPerPag
                     }
                 }
                 if(link){
+                    element.addClass("link");
                     element.click(function(){
                         var idx= element.data("index");
                         if(idx == gallery.opt.actualIdx ){
@@ -223,7 +226,7 @@ $.fn.initPagination=function(b){var a=this.get(0);a.opt={elements:null,elsPerPag
 
                             var scale=isHorizzontal ? ($(window).width()*70/zoomEl.width())/100: ($(window).height()*80/zoomEl.height())/100;
 
-                            var elTop="20%";
+                            var elTop=($(window).height()-zoomEl.height())/2;
 
                             overlay.fadeIn(t*2, function(){
                                 zoomEl.animate({scale: scale, top:elTop},t,function(){});

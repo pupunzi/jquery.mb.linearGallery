@@ -25,6 +25,28 @@
             white-space: inherit;
             background: #ffcc00;
         }
+
+        #linearGallery{
+            position: relative;
+            width: 100%;
+            margin: auto;
+            -moz-box-sizing: border-box;
+            height: 400px;
+        }
+
+        #linearGallery .element{
+            display:none;
+        }
+
+        .galleryBox .box{
+            font:35px/40px 'Abel', sans-serif;
+            color:#000;
+            white-space: normal;
+            overflow: hidden;
+            margin-top: 30px;
+        }
+
+
         .controller{
             margin: auto;
             text-align: center;
@@ -64,10 +86,12 @@
         <img src="elements/gallery1/HR/01.jpg" title="photo n°1" data-thumb="elements/gallery1/HR/01.jpg">
         <img src="elements/gallery1/HR/03.jpg" title="photo n°3" data-thumb="elements/gallery1/HR/03.jpg">
         <img src="elements/gallery1/HR/04.jpg" title="photo n°4" data-thumb="elements/gallery1/HR/04.jpg">
+
         <div class="box" data-link="" data-nozoom=true data-thumb="elements/gallery1/HR/01.jpg" style="text-align: left">
             <div style="position:absolute;top:0; width: 60%">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</div>
             <img style="position:absolute; top:0; right:0; width: 35%" src="elements/gallery1/HR/01.jpg">
         </div>
+
         <img src="elements/gallery1/HR/02.jpg" data-thumb="elements/gallery1/HR/02.jpg">
         <img src="elements/gallery1/HR/05.jpg" title="photo n°5" data-thumb="elements/gallery1/HR/05.jpg" data-link="http://pupunzi.com">
     </div>
