@@ -20,16 +20,16 @@
 
 /*Browser detection patch*/
 if (!jQuery.browser) {
-	jQuery.browser = {}, jQuery.browser.mozilla = !1, jQuery.browser.webkit = !1, jQuery.browser.opera = !1, jQuery.browser.safari = !1, jQuery.browser.chrome = !1, jQuery.browser.msie = !1;
-	var nAgt = navigator.userAgent;
-	jQuery.browser.ua = nAgt, jQuery.browser.name = navigator.appName, jQuery.browser.fullVersion = "" + parseFloat(navigator.appVersion), jQuery.browser.majorVersion = parseInt(navigator.appVersion, 10);
-	var nameOffset, verOffset, ix;
-	if (-1 != (verOffset = nAgt.indexOf("Opera")))jQuery.browser.opera = !0, jQuery.browser.name = "Opera", jQuery.browser.fullVersion = nAgt.substring(verOffset + 6), -1 != (verOffset = nAgt.indexOf("Version")) && (jQuery.browser.fullVersion = nAgt.substring(verOffset + 8)); else if (-1 != (verOffset = nAgt.indexOf("MSIE")))jQuery.browser.msie = !0, jQuery.browser.name = "Microsoft Internet Explorer", jQuery.browser.fullVersion = nAgt.substring(verOffset + 5); else if (-1 != nAgt.indexOf("Trident")) {
-		jQuery.browser.msie = !0, jQuery.browser.name = "Microsoft Internet Explorer";
-		var start = nAgt.indexOf("rv:") + 3, end = start + 4;
-		jQuery.browser.fullVersion = nAgt.substring(start, end)
-	} else-1 != (verOffset = nAgt.indexOf("Chrome")) ? (jQuery.browser.webkit = !0, jQuery.browser.chrome = !0, jQuery.browser.name = "Chrome", jQuery.browser.fullVersion = nAgt.substring(verOffset + 7)) : -1 != (verOffset = nAgt.indexOf("Safari")) ? (jQuery.browser.webkit = !0, jQuery.browser.safari = !0, jQuery.browser.name = "Safari", jQuery.browser.fullVersion = nAgt.substring(verOffset + 7), -1 != (verOffset = nAgt.indexOf("Version")) && (jQuery.browser.fullVersion = nAgt.substring(verOffset + 8))) : -1 != (verOffset = nAgt.indexOf("AppleWebkit")) ? (jQuery.browser.webkit = !0, jQuery.browser.name = "Safari", jQuery.browser.fullVersion = nAgt.substring(verOffset + 7), -1 != (verOffset = nAgt.indexOf("Version")) && (jQuery.browser.fullVersion = nAgt.substring(verOffset + 8))) : -1 != (verOffset = nAgt.indexOf("Firefox")) ? (jQuery.browser.mozilla = !0, jQuery.browser.name = "Firefox", jQuery.browser.fullVersion = nAgt.substring(verOffset + 8)) : (nameOffset = nAgt.lastIndexOf(" ") + 1) < (verOffset = nAgt.lastIndexOf("/")) && (jQuery.browser.name = nAgt.substring(nameOffset, verOffset), jQuery.browser.fullVersion = nAgt.substring(verOffset + 1), jQuery.browser.name.toLowerCase() == jQuery.browser.name.toUpperCase() && (jQuery.browser.name = navigator.appName));
-	-1 != (ix = jQuery.browser.fullVersion.indexOf(";")) && (jQuery.browser.fullVersion = jQuery.browser.fullVersion.substring(0, ix)), -1 != (ix = jQuery.browser.fullVersion.indexOf(" ")) && (jQuery.browser.fullVersion = jQuery.browser.fullVersion.substring(0, ix)), jQuery.browser.majorVersion = parseInt("" + jQuery.browser.fullVersion, 10), isNaN(jQuery.browser.majorVersion) && (jQuery.browser.fullVersion = "" + parseFloat(navigator.appVersion), jQuery.browser.majorVersion = parseInt(navigator.appVersion, 10)), jQuery.browser.version = jQuery.browser.majorVersion
+    jQuery.browser = {}, jQuery.browser.mozilla = !1, jQuery.browser.webkit = !1, jQuery.browser.opera = !1, jQuery.browser.safari = !1, jQuery.browser.chrome = !1, jQuery.browser.msie = !1;
+    var nAgt = navigator.userAgent;
+    jQuery.browser.ua = nAgt, jQuery.browser.name = navigator.appName, jQuery.browser.fullVersion = "" + parseFloat(navigator.appVersion), jQuery.browser.majorVersion = parseInt(navigator.appVersion, 10);
+    var nameOffset, verOffset, ix;
+    if (-1 != (verOffset = nAgt.indexOf("Opera")))jQuery.browser.opera = !0, jQuery.browser.name = "Opera", jQuery.browser.fullVersion = nAgt.substring(verOffset + 6), -1 != (verOffset = nAgt.indexOf("Version")) && (jQuery.browser.fullVersion = nAgt.substring(verOffset + 8)); else if (-1 != (verOffset = nAgt.indexOf("MSIE")))jQuery.browser.msie = !0, jQuery.browser.name = "Microsoft Internet Explorer", jQuery.browser.fullVersion = nAgt.substring(verOffset + 5); else if (-1 != nAgt.indexOf("Trident")) {
+        jQuery.browser.msie = !0, jQuery.browser.name = "Microsoft Internet Explorer";
+        var start = nAgt.indexOf("rv:") + 3, end = start + 4;
+        jQuery.browser.fullVersion = nAgt.substring(start, end)
+    } else-1 != (verOffset = nAgt.indexOf("Chrome")) ? (jQuery.browser.webkit = !0, jQuery.browser.chrome = !0, jQuery.browser.name = "Chrome", jQuery.browser.fullVersion = nAgt.substring(verOffset + 7)) : -1 != (verOffset = nAgt.indexOf("Safari")) ? (jQuery.browser.webkit = !0, jQuery.browser.safari = !0, jQuery.browser.name = "Safari", jQuery.browser.fullVersion = nAgt.substring(verOffset + 7), -1 != (verOffset = nAgt.indexOf("Version")) && (jQuery.browser.fullVersion = nAgt.substring(verOffset + 8))) : -1 != (verOffset = nAgt.indexOf("AppleWebkit")) ? (jQuery.browser.webkit = !0, jQuery.browser.name = "Safari", jQuery.browser.fullVersion = nAgt.substring(verOffset + 7), -1 != (verOffset = nAgt.indexOf("Version")) && (jQuery.browser.fullVersion = nAgt.substring(verOffset + 8))) : -1 != (verOffset = nAgt.indexOf("Firefox")) ? (jQuery.browser.mozilla = !0, jQuery.browser.name = "Firefox", jQuery.browser.fullVersion = nAgt.substring(verOffset + 8)) : (nameOffset = nAgt.lastIndexOf(" ") + 1) < (verOffset = nAgt.lastIndexOf("/")) && (jQuery.browser.name = nAgt.substring(nameOffset, verOffset), jQuery.browser.fullVersion = nAgt.substring(verOffset + 1), jQuery.browser.name.toLowerCase() == jQuery.browser.name.toUpperCase() && (jQuery.browser.name = navigator.appName));
+    -1 != (ix = jQuery.browser.fullVersion.indexOf(";")) && (jQuery.browser.fullVersion = jQuery.browser.fullVersion.substring(0, ix)), -1 != (ix = jQuery.browser.fullVersion.indexOf(" ")) && (jQuery.browser.fullVersion = jQuery.browser.fullVersion.substring(0, ix)), jQuery.browser.majorVersion = parseInt("" + jQuery.browser.fullVersion, 10), isNaN(jQuery.browser.majorVersion) && (jQuery.browser.fullVersion = "" + parseFloat(navigator.appVersion), jQuery.browser.majorVersion = parseInt(navigator.appVersion, 10)), jQuery.browser.version = jQuery.browser.majorVersion
 }
 
 
@@ -65,349 +65,349 @@ $.fn.initPagination=function(b){var a=this.get(0);a.opt={elements:null,elsPerPag
 
 (function($) {
 
-	$.mbLinearGallery={
-		name:"mb.linearGallery",
-		author:"Matteo Bicocchi",
-		version:"1.1",
-
-		defaults:{
-			elements:[], // if empty get children
-			thumbPlaceHolder:"#thumbs",
-			resizeEnabled:false,
-			transitionTime:600,
-			imageWrapperWidth:"0%",
-			imageMinWidth:550,
-			defaultScale:.2,
-			defaultOpacity:.4,
-			enableZoom:true,
-			addTouch:true,
-			onStart:function(){},
-			onChange:function(){},
-			onCreateThumbs:function(){}
-		},
-
-		build:function(opt){
-			return this.each(function(){
-				var gallery=this;
-				var $gallery=$(gallery);
-
-				$gallery.children().hide();
-
-				gallery.opt={};
-				$.extend(gallery.opt,$.mbLinearGallery.defaults,opt);
-
-				if (gallery.opt.elements.length == 0){
-					gallery.opt.elements = $gallery.children();
-				}
-
-				var galleryWrapper=$("<div/>").addClass("galleryWrapper");
-				$gallery.append(galleryWrapper);
-
-				galleryWrapper.css({
-					overflow:"hidden",
-					position: "relative",
-					whiteSpace: "nowrap",
-					"-moz-box-sizing": "border-box",
-					verticalAlign: "top"
-				});
-
-				for(var i=0; i<= gallery.opt.elements.length-1;i++){
-					var newImg=$.mbLinearGallery.buildImage(gallery,gallery.opt.elements[i],i+1);
-					galleryWrapper.append(newImg);
-					$.mbLinearGallery.buildThumbs(gallery,gallery.opt.elements[i]);
-				}
-
-				// Add empty elements at the beginning and at the end.
-				galleryWrapper.prepend($.mbLinearGallery.buildImage(gallery));
-				galleryWrapper.append($.mbLinearGallery.buildImage(gallery));
-
-				// set the height of the gallery
-				galleryWrapper.css({height:$(".galleryWrapper").parent().height()});
-
-				var elements=$(".element",".elementWrapper");
-				elements.each(function(i){
-					var el = $(this);
-					el.css({width:"auto",height:"100%"}).hide();
-
-					if(el.width()>=el.parent().width()){
-						el.css({width:"100%",height:"auto"});
-					}
-					$(".imageDesc", el).css({position:"absolute", left:$("img",el.parent()).position().left, width:$("img",el.parent()).width()});
-
-					el.fadeIn(3000, function(){
-					});
-				});
-
-				$(window).resize(function(){$.mbLinearGallery.refresh(gallery)});
-
-				if(gallery.opt.addTouch)
-					$gallery.addTouch();
-
-				if(typeof gallery.opt.onCreateThumbs=="function")
-					gallery.opt.onCreateThumbs(gallery.opt.thumbPlaceHolder);
-
-				$gallery.goTo(1,true);
-
-			});
-		},
-
-		buildImage:function(gallery, imgObj, idx){
-			var elementWrapper= $("<div/>").addClass("elementWrapper");
-
-			elementWrapper.css({
-				position: "relative",
-				overflow:"hidden",
-				width: gallery.opt.imageWrapperWidth,
-				minWidth: gallery.opt.imageMinWidth,
-				height: "101%",
-				display: "inline-block",
-				"text-align": "center",
-				"-moz-box-sizing": "border-box",
-				//        margin: -2,
-				padding: 0,
-				"vertical-align":"top"
-			}).click(function(){
-						if($(this).children().length>0){
-							var idx= $(this).index();
-							$(gallery).goTo(idx,true);
-						}
-					});
-
-			if(typeof imgObj == "object"){
-				var url= imgObj.url ? imgObj.url : $(imgObj).attr("src");
-				var link= imgObj.link ? imgObj.link : $(imgObj).data("link");
-				var element;
-
-				if($(imgObj).data("nozoom") || link)
-					elementWrapper.addClass("noZoom");
-
-
-
-				if(url){
-					element=$("<img>").addClass("galleryImage element").css({position:"relative"});
-					element.css({
-						margin: "auto",
-						cursor: "pointer",
-						height: "100%"
-					});
-					element.attr("src",url);
-				}else{
-					element=$("<div/>").addClass("galleryBox element").css({position:"relative"});
-					element.css({
-						margin: "auto",
-						cursor: "pointer",
-						height: "100%"
-					});
-					var c= $(imgObj).clone().css({height: $(gallery).height()}).show();
-					element.html(c);
-				}
-
-				if(idx){
-					element.data("index",idx);
-				}
-				elementWrapper.append(element);
-
-				var desc= imgObj.description ? imgObj.description : $(imgObj).attr("title");
-
-				if(desc){
-					var description=$("<div>").addClass("imageDesc")
-							.css({position:"absolute",left:element.position().left, width:elementWrapper.width(), display:"none"}).html(desc);
-					elementWrapper.append(description);
-
-/*
-					if(element.data("index")==1){
-						description.fadeIn();
-					}
-*/
-
-				}
-				if(link){
-					element.addClass("link");
-					element.click(function(){
-						var idx= element.data("index");
-						if(idx == gallery.opt.actualIdx ){
-							window.open(link);
-						}
-					});
-				}else if(gallery.opt.enableZoom && !$(imgObj).data("nozoom")){
-					element.click(function(){
-						var idx= element.data("index");
-						if(idx == gallery.opt.actualIdx ){
-							var t=gallery.opt.transitionTime/1.5;
-							var zoomEl=$(this).clone().addClass("zoomEl");
-							var zoomDesc=$(this).parent().find(".imageDesc").clone().addClass("zoomDesc");
-							zoomDesc.css({position:"absolute",left:$(this).offset().left}).hide();
-
-							var startTop=$(this).offset().top;
-							zoomEl.css({position:"absolute", top:startTop,left:$(this).offset().left, width:$(this).width(), height:$(this).height()});
-
-							var overlay=$("<div>").addClass("overlay").hide();
-							$(overlay).append(zoomEl);
-							$(overlay).append(zoomDesc);
-							$("body").append(overlay);
-
-							var isHorizzontal=zoomEl.height()<zoomEl.width();
-
-							var scale=isHorizzontal ? ($(window).width()*70/zoomEl.width())/100: ($(window).height()*80/zoomEl.height())/100;
-
-							var elTop=($(window).height()-zoomEl.height())/2;
-
-							overlay.fadeIn(t*2, function(){
-								zoomEl.animate({scale: scale, top:elTop},t,function(){});
-								zoomDesc.fadeIn();
-							});
-							overlay.one("click",function(){
-								zoomDesc.fadeOut();
-								zoomEl.animate({scale: '1', top:startTop},t,function(){
-									overlay.fadeOut(t*2,function(){overlay.remove()});
-								});
-							});
-						}
-					});
-				}
-			}
-			return elementWrapper;
-		},
-
-		addTouch: function(){
-			var $el = this;
-			var el = $el.get(0);
-
-			el.addEventListener('touchstart', function(event) {
-				var touch = event.touches[0];
-				el.opt.touchStartX= touch.pageX;
-				el.opt.touchStartY= touch.pageY;
-			});
-
-			el.addEventListener('touchend', function(event) {
-			});
-
-			el.addEventListener('touchmove', function(event) {
-				event.preventDefault();
-				var touch = event.touches[0];
-				if(touch.pageX > el.opt.touchStartX+300){
-					$el.goTo(el.opt.actualIdx-1,true);
-					el.opt.touchStartX=touch.pageX;
-				}else if(touch.pageX < el.opt.touchStartX-300){
-					$el.goTo(el.opt.actualIdx+1,true);
-					el.opt.touchStartX=touch.pageX;
-				}
-			})
-		},
-
-		buildThumbs:function(gallery,imgObj){
-
-			var thumbPlaceHolder= $(gallery.opt.thumbPlaceHolder);
-			var thumbURL = imgObj.thumb ? imgObj.thumb : $(imgObj).data("thumb");
-			thumbURL = thumbURL ? thumbURL : imgObj.src;
-			var thumbTitle=imgObj.title; //.replace(/\|/g,".")
-			var thumb=$("<img>").addClass("imgThumb").hide().load(function(){
-				thumb.fadeIn(2000);
-			}).attr({"src":thumbURL});
-			var thumbWrapper= $("<div>").addClass("thumbWrapper");
-
-			thumbWrapper.append(thumb);
-
-			thumbWrapper.click(function(){
-				if($(this).find("img").length>0){
-					var idx= $(this).index()+1;
-					$(gallery).goTo(idx,true);
-				}
-			});
-
-			thumbWrapper.bind("mouseenter",function(){
-
-				var titleDiv=$("<div>").addClass("thumbTitle");
-				titleDiv.html(thumbTitle);
-				titleDiv.css({position:"absolute", top:$(this).offset().top+$(this).height(), left:$(this).offset().left});
-				$("body").append(titleDiv);
-			}).bind("mouseleave",function(){
-						$(".thumbTitle").remove();
-					});
-
-			thumbPlaceHolder.append(thumbWrapper);
-		},
-
-		goTo:function(idx, anim){
-			var g= this.get(0);
-
-			if(idx<=0 || idx>g.opt.elements.length) return;
-
-			if(anim==undefined)
-				anim=true;
-
-			if(idx==g.opt.actualIdx && anim)
-				return;
-
-			g.opt.actualIdx=idx;
-
-			var gallery=$(".galleryWrapper",g);
-			var target= $(".elementWrapper").eq(g.opt.actualIdx);
-			var allImages= $(".elementWrapper",g);
-
-			var t=anim? g.opt.transitionTime:0;
-			allImages.animate({opacity:g.opt.defaultOpacity, scale: g.opt.defaultScale},t/1.5,function(){
-				allImages.removeClass("sel");
-				target.addClass("sel");
-				if(g.opt.enableZoom && !target.hasClass("noZoom"))
-					target.addClass("zoom");
-				allImages.css("z-index",0);
-				target.css("z-index",1);
-				if(anim)
-					$(".imageDesc", $(this)).fadeOut();
-			});
-
-			target.animate({opacity:1, scale: '1'},t/2,function(){
-
-				if(anim)
-					$(".imageDesc", target).fadeIn();
-				$(".imageDesc", target).css({position:"absolute",left:$(".element",target).position().left, width:$(".element",target).width()});
-			});
-
-			var thumbContainer=$(g.opt.thumbPlaceHolder);
-			$(".thumbWrapper",thumbContainer).removeClass("sel");
-			var targetThumb= $(".thumbWrapper",thumbContainer).eq(g.opt.actualIdx-1);
-			targetThumb.addClass("sel");
-
-			var scrollLeft = (target.width()*g.opt.actualIdx) - (($(".galleryWrapper",g).outerWidth()-target.outerWidth())/2);
-
-			$(".galleryWrapper",g).animate({scrollLeft:scrollLeft},t,function(){ //"easeOutSine",
-				if(typeof g.opt.onChange == "function"){
-					g.opt.onChange(g.opt.actualIdx);
-				}
-			});
-
-		},
-
-		refresh:function(gallery){
-
-			var galleryWrapper= $(".galleryWrapper",$(gallery));
-			var elements=$(".element",".elementWrapper");
-			var prop = galleryWrapper.height()/ galleryWrapper.width();
-
-
-			galleryWrapper.css({height:$(gallery).height()});
-
-			elements.each(function(){
-				$(this).css({width:"auto",height:"100%"});
-				if($(this).width()>=$(this).parent().width()){
-					$(this).css({width:"100%",height:"auto"})
-				}
-			});
-
-			var h= $(".galleryWrapper",$(gallery)).width()*prop;
-
-			if(gallery.opt.resizeEnabled){
-				$(".galleryWrapper",$(gallery)).css({height:h});
-			}
-
-			$(gallery).goTo(gallery.opt.actualIdx,false);
-
-		}
-	};
-
-	$.fn.mbLinearGallery= $.mbLinearGallery.build;
-	$.fn.addTouch= $.mbLinearGallery.addTouch;
-	$.fn.goTo= $.mbLinearGallery.goTo;
+    $.mbLinearGallery={
+        name:"mb.linearGallery",
+        author:"Matteo Bicocchi",
+        version:"1.1",
+
+        defaults:{
+            elements:[], // if empty get children
+            thumbPlaceHolder:"#thumbs",
+            resizeEnabled:false,
+            transitionTime:600,
+            imageWrapperWidth:"0%",
+            imageMinWidth:550,
+            defaultScale:.2,
+            defaultOpacity:.4,
+            enableZoom:true,
+            addTouch:true,
+            onStart:function(){},
+            onChange:function(){},
+            onCreateThumbs:function(){}
+        },
+
+        build:function(opt){
+            return this.each(function(){
+                var gallery=this;
+                var $gallery=$(gallery);
+
+                $gallery.children().hide();
+
+                gallery.opt={};
+                $.extend(gallery.opt,$.mbLinearGallery.defaults,opt);
+
+                if (gallery.opt.elements.length == 0){
+                    gallery.opt.elements = $gallery.children();
+                }
+
+                var galleryWrapper=$("<div/>").addClass("galleryWrapper");
+                $gallery.append(galleryWrapper);
+
+                galleryWrapper.css({
+                    overflow:"hidden",
+                    position: "relative",
+                    whiteSpace: "nowrap",
+                    "-moz-box-sizing": "border-box",
+                    verticalAlign: "top"
+                });
+
+                for(var i=0; i<= gallery.opt.elements.length-1;i++){
+                    var newImg=$.mbLinearGallery.buildImage(gallery,gallery.opt.elements[i],i+1);
+                    galleryWrapper.append(newImg);
+                    $.mbLinearGallery.buildThumbs(gallery,gallery.opt.elements[i]);
+                }
+
+                // Add empty elements at the beginning and at the end.
+                galleryWrapper.prepend($.mbLinearGallery.buildImage(gallery));
+                galleryWrapper.append($.mbLinearGallery.buildImage(gallery));
+
+                // set the height of the gallery
+                galleryWrapper.css({height:$(".galleryWrapper").parent().height()});
+
+                var elements=$(".element",".elementWrapper");
+                elements.each(function(i){
+                    var el = $(this);
+                    el.css({width:"auto",height:"100%"}).hide();
+
+                    if(el.width()>=el.parent().width()){
+                        el.css({width:"100%",height:"auto"});
+                    }
+                    $(".imageDesc", el).css({position:"absolute", left:$("img",el.parent()).position().left, width:$("img",el.parent()).width()});
+
+                    el.fadeIn(3000, function(){
+                    });
+                });
+
+                $(window).resize(function(){$.mbLinearGallery.refresh(gallery)});
+
+                if(gallery.opt.addTouch)
+                    $gallery.addTouch();
+
+                if(typeof gallery.opt.onCreateThumbs=="function")
+                    gallery.opt.onCreateThumbs(gallery.opt.thumbPlaceHolder);
+
+                $gallery.goTo(1,true);
+
+            });
+        },
+
+        buildImage:function(gallery, imgObj, idx){
+            var elementWrapper= $("<div/>").addClass("elementWrapper");
+
+            elementWrapper.css({
+                position: "relative",
+                overflow:"hidden",
+                width: gallery.opt.imageWrapperWidth,
+                minWidth: gallery.opt.imageMinWidth,
+                height: "101%",
+                display: "inline-block",
+                "text-align": "center",
+                "-moz-box-sizing": "border-box",
+                //        margin: -2,
+                padding: 0,
+                "vertical-align":"top"
+            }).click(function(){
+                if($(this).children().length>0){
+                    var idx= $(this).index();
+                    $(gallery).goTo(idx,true);
+                }
+            });
+
+            if(typeof imgObj == "object"){
+                var url= imgObj.url ? imgObj.url : $(imgObj).attr("src");
+                var link= imgObj.link ? imgObj.link : $(imgObj).data("link");
+                var element;
+
+                if($(imgObj).data("nozoom") || link)
+                    elementWrapper.addClass("noZoom");
+
+
+
+                if(url){
+                    element=$("<img>").addClass("galleryImage element").css({position:"relative"});
+                    element.css({
+                        margin: "auto",
+                        cursor: "pointer",
+                        height: "100%"
+                    });
+                    element.attr("src",url);
+                }else{
+                    element=$("<div/>").addClass("galleryBox element").css({position:"relative"});
+                    element.css({
+                        margin: "auto",
+                        cursor: "pointer",
+                        height: "100%"
+                    });
+                    var c= $(imgObj).clone().css({height: $(gallery).height()}).show();
+                    element.html(c);
+                }
+
+                if(idx){
+                    element.data("index",idx);
+                }
+                elementWrapper.append(element);
+
+                var desc= imgObj.description ? imgObj.description : $(imgObj).attr("title");
+
+                if(desc){
+                    var description=$("<div>").addClass("imageDesc")
+                        .css({position:"absolute",left:element.position().left, width:elementWrapper.width(), display:"none"}).html(desc);
+                    elementWrapper.append(description);
+
+                    /*
+                     if(element.data("index")==1){
+                     description.fadeIn();
+                     }
+                     */
+
+                }
+                if(link){
+                    element.addClass("link");
+                    element.click(function(){
+                        var idx= element.data("index");
+                        if(idx == gallery.opt.actualIdx ){
+                            window.open(link);
+                        }
+                    });
+                }else if(gallery.opt.enableZoom && !$(imgObj).data("nozoom")){
+                    element.click(function(){
+                        var idx= element.data("index");
+                        if(idx == gallery.opt.actualIdx ){
+                            var t=gallery.opt.transitionTime/1.5;
+                            var zoomEl=$(this).clone().addClass("zoomEl");
+                            var zoomDesc=$(this).parent().find(".imageDesc").clone().addClass("zoomDesc");
+                            zoomDesc.css({position:"absolute",left:$(this).offset().left}).hide();
+
+                            var startTop=$(this).offset().top;
+                            zoomEl.css({position:"absolute", top:startTop,left:$(this).offset().left, width:$(this).width(), height:$(this).height()});
+
+                            var overlay=$("<div>").addClass("overlay").hide();
+                            $(overlay).append(zoomEl);
+                            $(overlay).append(zoomDesc);
+                            $("body").append(overlay);
+
+                            var isHorizzontal=zoomEl.height()<zoomEl.width();
+
+                            var scale=isHorizzontal ? ($(window).width()*70/zoomEl.width())/100: ($(window).height()*80/zoomEl.height())/100;
+
+                            var elTop=($(window).height()-zoomEl.height())/2;
+
+                            overlay.fadeIn(t*2, function(){
+                                zoomEl.animate({scale: scale, top:elTop},t,function(){});
+                                zoomDesc.fadeIn();
+                            });
+                            overlay.one("click",function(){
+                                zoomDesc.fadeOut();
+                                zoomEl.animate({scale: '1', top:startTop},t,function(){
+                                    overlay.fadeOut(t*2,function(){overlay.remove()});
+                                });
+                            });
+                        }
+                    });
+                }
+            }
+            return elementWrapper;
+        },
+
+        addTouch: function(){
+            var $el = this;
+            var el = $el.get(0);
+
+            el.addEventListener('touchstart', function(event) {
+                var touch = event.touches[0];
+                el.opt.touchStartX= touch.pageX;
+                el.opt.touchStartY= touch.pageY;
+            });
+
+            el.addEventListener('touchend', function(event) {
+            });
+
+            el.addEventListener('touchmove', function(event) {
+                event.preventDefault();
+                var touch = event.touches[0];
+                if(touch.pageX > el.opt.touchStartX+300){
+                    $el.goTo(el.opt.actualIdx-1,true);
+                    el.opt.touchStartX=touch.pageX;
+                }else if(touch.pageX < el.opt.touchStartX-300){
+                    $el.goTo(el.opt.actualIdx+1,true);
+                    el.opt.touchStartX=touch.pageX;
+                }
+            })
+        },
+
+        buildThumbs:function(gallery,imgObj){
+
+            var thumbPlaceHolder= $(gallery.opt.thumbPlaceHolder);
+            var thumbURL = imgObj.thumb ? imgObj.thumb : $(imgObj).data("thumb");
+            thumbURL = thumbURL ? thumbURL : imgObj.src;
+            var thumbTitle=imgObj.title; //.replace(/\|/g,".")
+            var thumb=$("<img>").addClass("imgThumb").hide().load(function(){
+                thumb.fadeIn(2000);
+            }).attr({"src":thumbURL});
+            var thumbWrapper= $("<div>").addClass("thumbWrapper");
+
+            thumbWrapper.append(thumb);
+
+            thumbWrapper.click(function(){
+                if($(this).find("img").length>0){
+                    var idx= $(this).index()+1;
+                    $(gallery).goTo(idx,true);
+                }
+            });
+
+            thumbWrapper.bind("mouseenter",function(){
+
+                var titleDiv=$("<div>").addClass("thumbTitle");
+                titleDiv.html(thumbTitle);
+                titleDiv.css({position:"absolute", top:$(this).offset().top+$(this).height(), left:$(this).offset().left});
+                $("body").append(titleDiv);
+            }).bind("mouseleave",function(){
+                $(".thumbTitle").remove();
+            });
+
+            thumbPlaceHolder.append(thumbWrapper);
+        },
+
+        goTo:function(idx, anim){
+            var g= this.get(0);
+
+            if(idx<=0 || idx>g.opt.elements.length) return;
+
+            if(anim==undefined)
+                anim=true;
+
+            if(idx==g.opt.actualIdx && anim)
+                return;
+
+            g.opt.actualIdx=idx;
+
+            var gallery=$(".galleryWrapper",g);
+            var target= $(".elementWrapper").eq(g.opt.actualIdx);
+            var allImages= $(".elementWrapper",g);
+
+            var t=anim? g.opt.transitionTime:0;
+            allImages.animate({opacity:g.opt.defaultOpacity, scale: g.opt.defaultScale},t/1.5,function(){
+                allImages.removeClass("sel");
+                target.addClass("sel");
+                if(g.opt.enableZoom && !target.hasClass("noZoom"))
+                    target.addClass("zoom");
+                allImages.css("z-index",0);
+                target.css("z-index",1);
+                if(anim)
+                    $(".imageDesc", $(this)).fadeOut();
+            });
+
+            target.animate({opacity:1, scale: '1'},t/2,function(){
+
+                if(anim)
+                    $(".imageDesc", target).fadeIn();
+                $(".imageDesc", target).css({position:"absolute",left:$(".element",target).position().left, width:$(".element",target).width()});
+            });
+
+            var thumbContainer=$(g.opt.thumbPlaceHolder);
+            $(".thumbWrapper",thumbContainer).removeClass("sel");
+            var targetThumb= $(".thumbWrapper",thumbContainer).eq(g.opt.actualIdx-1);
+            targetThumb.addClass("sel");
+
+            var scrollLeft = (target.width()*g.opt.actualIdx) - (($(".galleryWrapper",g).outerWidth()-target.outerWidth())/2);
+
+            $(".galleryWrapper",g).animate({scrollLeft:scrollLeft},t,function(){ //"easeOutSine",
+                if(typeof g.opt.onChange == "function"){
+                    g.opt.onChange(g.opt.actualIdx);
+                }
+            });
+
+        },
+
+        refresh:function(gallery){
+
+            var galleryWrapper= $(".galleryWrapper",$(gallery));
+            var elements=$(".element",".elementWrapper");
+            var prop = galleryWrapper.height()/ galleryWrapper.width();
+
+
+            galleryWrapper.css({height:$(gallery).height()});
+
+            elements.each(function(){
+                $(this).css({width:"auto",height:"100%"});
+                if($(this).width()>=$(this).parent().width()){
+                    $(this).css({width:"100%",height:"auto"})
+                }
+            });
+
+            var h= $(".galleryWrapper",$(gallery)).width()*prop;
+
+            if(gallery.opt.resizeEnabled){
+                $(".galleryWrapper",$(gallery)).css({height:h});
+            }
+
+            $(gallery).goTo(gallery.opt.actualIdx,false);
+
+        }
+    };
+
+    $.fn.mbLinearGallery = $.mbLinearGallery.build;
+    $.fn.addTouch = $.mbLinearGallery.addTouch;
+    $.fn.goTo = $.mbLinearGallery.goTo;
 
 })(jQuery);
